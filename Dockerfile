@@ -1,11 +1,13 @@
-FROM debian:stable-slim
-MAINTAINER Brian Bassett <bbassett1276@gmail.com>
+FROM debian:testing
+MAINTAINER Patrick Höhn <hoehnp@gmx.de>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	ca-certificates \
 	git \
 	make \
 	openscad \
-    && rm -rf /var/lib/apt/lists/*
+        binutils \
+    && rm -rf /var/lib/apt/lists/* \
+    && strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 RUN mkdir -p /root/.local/share /.local/share
 
